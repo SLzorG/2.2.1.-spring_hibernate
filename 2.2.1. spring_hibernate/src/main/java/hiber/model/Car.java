@@ -9,16 +9,26 @@ public class Car {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
-    private Long id  ;
-
+    private Long id;
     @Column(name = "model")
-    public String model;
-
+    private String model;
     @Column(name = "series")
-    public int series;
+    private int series;
 
-       public Car() {
+    @OneToOne(mappedBy = "car")
+    private User user;
+
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    public Car() {
+
     }
 
     public Car(String model, int series) {
@@ -43,9 +53,13 @@ public class Car {
         this.series = series;
     }
 
-    public void setId(Long id) {this.id = id;}
+    public void setId(Long id) {
+        this.id = id;
+    }
 
-    public Long getId() {return id;}
+    public Long getId() {
+        return id;
+    }
 
     @Override
     public boolean equals(Object o) {
